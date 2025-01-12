@@ -95,16 +95,16 @@ app.post("/api/recipes/save", async (req, res) => {
     };
 });
 
-// // Get all saved recipes
-// app.get("/api/recipes/saved", async (req, res) => {
-//     try {
-//         const response = await pool.query("SELECT * FROM SavedRecipes;");
+// Get all saved recipes
+app.get("/api/recipes/saved", async (req, res) => {
+    try {
+        const response = await pool.query("SELECT * FROM SavedRecipes;");
         
-//         res.json(response);
-//     } catch (err) {
-//         console.error(err.message);
-//     };
-// });
+        res.json(response);
+    } catch (err) {
+        console.error(err.message);
+    };
+});
 
 
 // Delete saved recipe
