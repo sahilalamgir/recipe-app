@@ -16,8 +16,8 @@ app.use(express.json());
 // Get all recipes (later get from db first, or maybe not for this one)
 app.get("/api/recipes", async (req, res) => {
     try {
-        const searchTerm = req.body.food;
-        console.log(searchTerm);
+        const searchInput = req.query.query;
+        console.log(searchInput);
 
         const recipeParameters = {
             method: "GET",
@@ -28,7 +28,7 @@ app.get("/api/recipes", async (req, res) => {
         };
 
         const response = await fetch("https://api.spoonacular.com/recipes/complexSearch?" + new URLSearchParams({
-            query: searchTerm,
+            query: searchInput,
             fillIngredients: true,
             addRecipeInstructions: true,
             addRecipeNutrition: true
@@ -105,7 +105,6 @@ app.get("/api/recipes/saved", async (req, res) => {
         console.error(err.message);
     };
 });
-
 
 // Delete saved recipe
 app.delete("/api/recipes/saved/:id", async (req, res) => {
