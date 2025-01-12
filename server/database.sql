@@ -1,16 +1,20 @@
-CREATE DATABASE recipe;
+CREATE DATABASE recipe_app;
 
-CREATE TABLE users(
+CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100)
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE recipes (
+CREATE TABLE Recipes (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     image_url TEXT,
     time_to_cook INT,
-    instructions TEXT,
+    calories DECIMAL,
+    instructions JSONB,
     spoonacular_id INT UNIQUE,
     created_at TIMESTAMP DEFAULT NOW()
 );
@@ -18,14 +22,13 @@ CREATE TABLE recipes (
 CREATE TABLE Ingredients (
     id SERIAL PRIMARY KEY,
     recipe_id INT REFERENCES Recipes(id) ON DELETE CASCADE,
-    name VARCHAR(255) NOT NULL,
-    amount DECIMAL,
-    unit VARCHAR(50),
+    ingredient JSONB NOT NULL,
     created_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE saved_recipes(
+CREATE TABLE SavedRecipes (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id) ON DELETE CASCADE,
-    recipe_id INT REFERENCES recipes(id) ON DELETE CASCADE
+    user_id INT REFERENCES Users(id) ON DELETE CASCADE,
+    recipe_id INT REFERENCES Recipes(id) ON DELETE CASCADE,
+    saved_at TIMESTAMP DEFAULT NOW()
 );
