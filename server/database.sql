@@ -7,7 +7,10 @@ CREATE TABLE users(
 
 CREATE TABLE recipes(
     id SERIAL PRIMARY KEY,
-    title VARCHAR(255)
+    title VARCHAR(255),
+    -- raw_ingredient VARCHAR(255),
+    -- amount INT,
+
 );
 
 CREATE TABLE saved_recipes(

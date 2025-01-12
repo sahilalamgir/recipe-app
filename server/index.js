@@ -13,7 +13,7 @@ app.use(express.json());
 
 // Routes
 
-// Get all recipes
+// Get all recipes (later get from db first, or maybe not for this one)
 app.get("/api/recipes", async (req, res) => {
     try {
         const reqFood = req.body.food;
@@ -43,7 +43,7 @@ app.get("/api/recipes", async (req, res) => {
     };
 });
 
-// Get recipe
+// Get recipe (later get from db first)
 app.get("/api/recipes/:id", async (req, res) => {
     try {
         const reqId = req.params.id;
@@ -69,6 +69,33 @@ app.get("/api/recipes/:id", async (req, res) => {
         console.error(err);
     };
 });
+
+// // Post saved recipe (later get from db first)
+// app.post("/api/recipes/save", async (req, res) => {
+//     try {
+//         const reqId = req.params.id;
+//         console.log(reqId, typeof reqId);
+
+//         const recipeParameters = {
+//             method: "GET",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "x-api-key": API_KEY
+//             }
+//         };
+        
+//         const response = await fetch(`https://api.spoonacular.com/recipes/${reqId}/information?${
+//             new URLSearchParams({includeNutrition: true}).toString()
+//         }`, recipeParameters)
+//             .then(result => result.json())
+
+//         // const newRes = await pool.query("INSERT INTO users (name) VALUES($1) RETURNING *", [query]);
+        
+//         res.json(response);
+//     } catch (err) {
+//         console.error(err);
+//     };
+// });
 
 app.listen(5000, () => {
     console.log("Server has started on port 5000");
