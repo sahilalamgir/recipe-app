@@ -7,7 +7,7 @@ const pool = new Pool({
     password: process.env.POSTGRES_PASSWORD,
     host: "localhost",
     port: 5432,
-    database: "recipe"
+    database: "recipe_app"
 });
 
 module.exports = pool;
