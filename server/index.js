@@ -107,16 +107,16 @@ app.post("/api/recipes/save", async (req, res) => {
 // });
 
 
-// // Delete saved recipe
-// app.delete("/api/recipes/saved/:id", async (req, res) => {
-//     try {
-//         const savedId = req.params.id;
-//         const delRec = await pool.query("DELETE FROM SavedRecipes WHERE id = $1 RETURNING *", [savedId]);
-//         res.json(delRec);
-//     } catch (err) {
-//         console.error(err.message);
-//     }
-// });
+// Delete saved recipe
+app.delete("/api/recipes/saved/:id", async (req, res) => {
+    try {
+        const savedId = req.params.id;
+        const delRec = await pool.query("DELETE FROM SavedRecipes WHERE id = $1 RETURNING *", [savedId]);
+        res.json(delRec);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
 
 app.listen(5000, () => {
     console.log("Server has started on port 5000");
